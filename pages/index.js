@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useEffect, useState } from "react";
+import { Metric, Title, Subtitle, Bold, Italic, Text } from "@tremor/react";
 
 const apiCall = {
   op: "subscribe",
@@ -11,13 +12,14 @@ export default function Home() {
     const [pair, setPair] = useState("");
   
     useEffect(() => {
-      const ws = new WebSocket("wss://ws.bitmex.com/realtime");
+      const ws = new WebSocket(process.env.NEXT_PUBLIC_CRYPTO_API);
   
       ws.onopen = (event) => {
         ws.send(JSON.stringify(apiCall));
       };
       ws.onmessage = function (event) {
         const json = JSON.parse(event.data);
+        console.log(json);
   
         try {
           if (json.action === "insert") {
@@ -40,9 +42,10 @@ export default function Home() {
       {pair !== "" && (
         <>
           <h1>Welcome to {pair} realtime price page</h1>
-          <h2>
-            {pair} price is {bid}
-          </h2>
+          {pair}
+          <Metric>
+             {bid}
+          </Metric>
         </>
       )}
     </div>
