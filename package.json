@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Realtime Crypto Currency Tracker",
   "dependencies": {
+    "@heroicons/react": "1.0.6",
     "@tremor/react": "^3.6.6",
     "next": "13.4.19",
     "react": "^18.2.0",
